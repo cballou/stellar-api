@@ -87,6 +87,11 @@ class TransactionBuilder implements XdrEncodableInterface
     private $memo;
 
     /**
+     * @var int Base fee in stroops.
+     */
+    private $baseFee = 100;
+
+    /**
      * @var VariableArray[]
      */
     private $operations;
@@ -230,7 +235,7 @@ class TransactionBuilder implements XdrEncodableInterface
     public function getFee()
     {
         // todo: load base fee from network
-        return 100 * $this->operations->count();
+        return $this->baseFee * $this->operations->count();
     }
 
     /**
@@ -499,6 +504,22 @@ class TransactionBuilder implements XdrEncodableInterface
     public function setUpperTimebound(\DateTime $upperTimebound)
     {
         $this->timeBounds->setMaxTime($upperTimebound);
+
+        return $this;
+    }
+
+    /**
+     * Allow for adjustable fee.
+     *
+     * @param $fee
+     */
+    public function setFee($fee)
+    {
+        if (!is_int($fee) || ($fee < 100)) {
+            $this->baseFee = 100;
+        } else {
+            $this->baseFee = $fee;
+        }
 
         return $this;
     }
