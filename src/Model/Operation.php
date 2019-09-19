@@ -9,17 +9,19 @@ namespace ZuluCrypto\StellarSdk\Model;
  */
 class Operation extends RestApiModel
 {
-    const TYPE_CREATE_ACCOUNT       = 'create_account';
-    const TYPE_PAYMENT              = 'payment';
-    const TYPE_PATH_PAYMENT         = 'path_payment';
-    const TYPE_MANAGE_OFFER         = 'manage_offer';
-    const TYPE_CREATE_PASSIVE_OFFER = 'create_passive_offer';
-    const TYPE_SET_OPTIONS          = 'set_options';
-    const TYPE_CHANGE_TRUST         = 'change_trust';
-    const TYPE_ALLOW_TRUST          = 'allow_trust';
-    const TYPE_ACCOUNT_MERGE        = 'account_merge';
-    const TYPE_INFLATION            = 'inflation';
-    const TYPE_MANAGE_DATA          = 'manage_data';
+    const TYPE_CREATE_ACCOUNT           = 'create_account';
+    const TYPE_PAYMENT                  = 'payment';
+    const TYPE_PATH_PAYMENT             = 'path_payment';
+    const TYPE_MANAGE_BUY_OFFER         = 'manage_buy_offer';
+    const TYPE_MANAGE_SELL_OFFER        = 'manage_offer';
+    const TYPE_MANAGE_OFFER             = 'manage_offer'; // TODO: deprecated
+    const TYPE_CREATE_PASSIVE_OFFER     = 'create_passive_offer';
+    const TYPE_SET_OPTIONS              = 'set_options';
+    const TYPE_CHANGE_TRUST             = 'change_trust';
+    const TYPE_ALLOW_TRUST              = 'allow_trust';
+    const TYPE_ACCOUNT_MERGE            = 'account_merge';
+    const TYPE_INFLATION                = 'inflation';
+    const TYPE_MANAGE_DATA              = 'manage_data';
 
     /**
      * Operation ID on the Stellar network
