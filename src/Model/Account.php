@@ -189,6 +189,37 @@ class Account extends RestApiModel
     /**
      * @param null $sinceCursor
      * @param int  $limit
+     * @return array
+     */
+    public function getOffers($sinceCursor = null, $limit = 50)
+    {
+        $results = [];
+
+        $url = sprintf('/accounts/%s/offers', $this->accountId);
+        $params = [];
+
+        if ($sinceCursor) $params['cursor'] = $sinceCursor;
+        if ($limit) $params['limit'] = $limit;
+
+        if ($params) {
+            $url .= '?' . http_build_query($params);
+        }
+
+        $response = $this->apiClient->get($url);
+        $rawRecords = $response->getRecords($limit);
+
+        foreach ($rawRecords as $rawRecord) {
+            $result = ManageOfferOperation::fromRawResponseData($rawRecord);
+            $result->setApiClient($this->getApiClient());
+            $results[] = $result;
+        }
+
+        return $results;
+    }
+
+    /**
+     * @param null $sinceCursor
+     * @param int  $limit
      * @return array|AssetTransferInterface[]|RestApiModel[]
      */
     public function getPayments($sinceCursor = null, $limit = 50)
